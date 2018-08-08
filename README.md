@@ -1,4 +1,4 @@
-# vue-modal-bootstrap
+# vue-modal-plugin
 
 > vue modal plugin
 
