@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "postversion": "npm run build && git push && git push --tags"
+    "postversion": "npm run build && npm publis && git push && git push --tags"
   },
   "dependencies": {
     "vue": "^2.4.4"
