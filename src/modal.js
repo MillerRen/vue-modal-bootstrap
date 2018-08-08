@@ -16,7 +16,7 @@ function modal (opts, Component) {
 }
 
 function install (Vue, opts) {
-  ModalConstructor = Vue.extend(Modal)
+  ModalConstructor = Vue.extend(Object.assign(Modal, opts))
   Vue.prototype.$modal = modal
   Vue.modal = modal
 }
