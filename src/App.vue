@@ -14,7 +14,10 @@ export default {
         prompt: true,
         autoClose: false,
         okText: '好',
-        cancelText: '取消'
+        cancelText: '取消',
+        callback: function (value) {
+          console.log(value)
+        }
       },
       // {
       //   template: '<div>this is custom component</div>'

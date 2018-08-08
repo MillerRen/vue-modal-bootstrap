@@ -57,24 +57,36 @@ export default {
       type: Boolean,
       default: false
     },
-    inputValue: {
-    },
     autoClose: {
       type: Boolean,
       default: true
+    },
+    callback: {
+      type: Function,
+      default () {
+        return function () {}
+      }
+    }
+  },
+  data () {
+    return {
+      inputValue: ''
     }
   },
   methods: {
     close () {
       this.$emit('close')
+      this.callback()
       this.$destroy()
     },
     postive () {
       this.$emit('postive', this.inputValue)
+      this.callback(this.inputValue)
       this.autoClose && this.$destroy()
     },
     negative () {
       this.$emit('negative', this.inputValue)
+      this.callback(this.inputValue)
       this.autoClose && this.$destroy()
     }
   },
