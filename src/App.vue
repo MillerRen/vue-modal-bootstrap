@@ -9,26 +9,27 @@ export default {
   name: 'app',
   mounted () {
     var vm = this.$modal({
-      propsData: {
-        title: '标题',
-        data: {
-          prompt: true
-        }
+        title: '确定',
+        message: '操作后无法撤销',
+        prompt: true,
+        autoClose: false,
+        okText: '好',
+        cancelText: '取消'
       },
-      components: {
-        // ModalBody: {render: () => ''}
-      }
-    })
-    vm.$on('postive', () => {
-      console.log('点击了确定')
-      var body = vm.$refs.body
-      var value = body.value
+      // {
+      //   template: '<div>this is custom component</div>'
+      // }
+    )
+    vm.$on('postive', (value) => {
       console.log(value)
       value&&vm.$destroy()
     })
-    vm.$on('negative', () => {
-      console.log('点击了取消')
+    vm.$on('negative', (value) => {
+      console.log(value)
       vm.$destroy()
+    })
+    vm.$on('close', () => {
+      console.log('close')
     })
   }
 }

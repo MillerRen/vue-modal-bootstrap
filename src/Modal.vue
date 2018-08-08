@@ -7,12 +7,16 @@
     </button>
     <div class="modal-content">
       <header class="modal-header" v-if="title" ref="header">{{title}}</header>
-      <content class="modal-body">
-        <modal-body v-bind="data" ref="body"></modal-body>
-      </content>
+      <div v-if="!$options.components.ModalBody" class="modal-body">
+        <div class="message-content" v-if="message||prompt">
+          <p v-if="message">{{message}}</p>
+          <input type="text" class="form-control" v-model="inputValue" v-if="prompt">
+        </div>
+      </div>
+      <modal-body v-if="$options.components.ModalBody" v-bind="data" ref="body" class="modal-body"></modal-body>
       <footer class="modal-footer" ref="footer">
-        <button class="btn btn-primary" @click="$emit('postive')">{{okText}}</button>
-        <button class="btn btn-default" @click="$emit('negative')">{{cancelText}}</button>
+        <button class="btn btn-primary" @click="postive">{{okText}}</button>
+        <button class="btn btn-default" @click="negative">{{cancelText}}</button>
       </footer>
     </div>
   </div>
@@ -20,13 +24,8 @@
 </template>
 
 <script>
-import ModalBody from './ModalBody.vue'
-
 export default {
   name: 'Modal',
-  components: {
-    ModalBody
-  },
   props: {
     data: {
       type: Object,
@@ -44,16 +43,39 @@ export default {
     },
     okText: {
       type: String,
-      default: '确定'
+      default: 'ok'
     },
     cancelText: {
       type: String,
-      default: '取消'
+      default: 'cancel'
+    },
+    message: {
+      type: String,
+      default: ''
+    },
+    prompt: {
+      type: Boolean,
+      default: false
+    },
+    inputValue: {
+    },
+    autoClose: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
-    close (data) {
+    close () {
+      this.$emit('close')
       this.$destroy()
+    },
+    postive () {
+      this.$emit('postive', this.inputValue)
+      this.autoClose && this.$destroy()
+    },
+    negative () {
+      this.$emit('negative', this.inputValue)
+      this.autoClose && this.$destroy()
     }
   },
   mounted () {
@@ -67,7 +89,7 @@ export default {
 </script>
 
 <style>
-.component-modal {
+.component-modal.modal {
   display: block;
 }
 .modal .modal-backdrop {
@@ -90,8 +112,5 @@ export default {
   height: 100%;
   border: none;
   border-radius: 0;
-}
-.modal .modal-body {
-  display: block;
 }
 </style>
