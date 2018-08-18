@@ -93,9 +93,11 @@ export default {
   mounted () {
     document.body.classList.add('modal-open')
   },
+  beforeDestroy () {
+    this.$el.parentNode.removeChild(this.$el)
+  },
   destroyed () {
     document.body.classList.remove('modal-open')
-    this.$el.remove()
   }
 }
 </script>
