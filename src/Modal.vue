@@ -7,10 +7,10 @@
     </button>
     <div class="modal-content">
       <header class="modal-header" v-if="title" ref="header">{{title}}</header>
-      <div v-if="!$options.components.ModalBody" class="modal-body">
+      <div class="modal-body">
         <div class="message-content" v-if="message||prompt">
           <p v-if="message">{{message}}</p>
-          <input type="text" class="form-control" v-model="inputValue" v-if="prompt">
+          <input type="text" class="form-control" v-model="inputValue" >
         </div>
       </div>
       <modal-body v-if="$options.components.ModalBody" v-bind="data" ref="body" class="modal-body"></modal-body>
@@ -55,7 +55,7 @@ export default {
     },
     prompt: {
       type: Boolean,
-      default: false
+      default: true
     },
     autoClose: {
       type: Boolean,

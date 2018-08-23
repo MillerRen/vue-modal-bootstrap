@@ -17,11 +17,17 @@ export default {
         cancelText: '取消',
         callback: function (value) {
           console.log(value)
+        },
+        data: {
+          text: 'this is custom component'
         }
       },
-      // {
-      //   template: '<div>this is custom component</div>'
-      // }
+      {
+        props: {
+          text: ''
+        },
+        template: '<div>{{text}}</div>'
+      }
     )
     vm.$on('postive', (value) => {
       console.log(value)
