@@ -1,6 +1,6 @@
 # vue2-modal-bootstrap
 
-> vue2 modal bootstrap
+> vue2 modal bootstrap. support render custom component!
 
 ```javascript
 import Vue from 'vue'
@@ -16,11 +16,17 @@ var vm = this.$modal({
     cancelText: '取消',
     callback: function (value) {
       console.log(value)
+    },
+    data: {
+      text: 'this is custom component'
     }
   },
-  // {
-  //   template: '<div>this is custom component</div>'
-  // }
+  {
+    props: {
+      text: ''
+    },
+    template: '<div>{{text}}</div>'
+  }
 )
 vm.$on('postive', (value) => {
   console.log(value)
