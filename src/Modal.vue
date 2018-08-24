@@ -13,7 +13,7 @@
           <input type="text" class="form-control" v-model="inputValue" >
         </div>
       </div>
-      <modal-body v-if="$options.components.ModalBody" v-bind="data" ref="body" class="modal-body"></modal-body>
+      <modal-body v-if="$options.components.ModalBody" v-bind="data" v-on="events" ref="body" class="modal-body"></modal-body>
       <footer class="modal-footer" ref="footer">
         <button class="btn btn-primary" @click="postive">{{okText}}</button>
         <button class="btn btn-default" @click="negative">{{cancelText}}</button>
@@ -28,6 +28,12 @@ export default {
   name: 'Modal',
   props: {
     data: {
+      type: Object,
+      default () {
+        return {}
+      }
+    },
+    events: {
       type: Object,
       default () {
         return {}

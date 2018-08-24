@@ -14,31 +14,26 @@ var vm = this.$modal({
     autoClose: false,
     okText: '好',
     cancelText: '取消',
+    size: 'sm',
     callback: function (value) {
       console.log(value)
     },
     data: {
       text: 'this is custom component'
+    },
+    events: {
+      click () {
+        console.log('click')
+      }
     }
   },
   {
     props: {
       text: ''
     },
-    template: '<div>{{text}}</div>'
+    template: '<div @click="$emit(\'click\')">{{text}}</div>'
   }
 )
-vm.$on('postive', (value) => {
-  console.log(value)
-  value&&vm.$destroy()
-})
-vm.$on('negative', (value) => {
-  console.log(value)
-  vm.$destroy()
-})
-vm.$on('close', () => {
-  console.log('close')
-})
 ```
 
 ## Build Setup
